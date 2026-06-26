@@ -1,0 +1,16 @@
+services:
+  digital-twin:
+    build: .
+    ports:
+      - "${PORT:-5086}:5086"
+    env_file:
+      - server/.env.local
+    environment:
+      NODE_ENV: production
+      PORT: 5086
+    volumes:
+      - digital-twin-data:/app/server/data
+    restart: unless-stopped
+
+volumes:
+  digital-twin-data:

@@ -1,0 +1,9 @@
+client/node_modules
+server/node_modules
+server/.env.local
+client/dist
+.git
+.gitignore
+*.md
+.cursor
+.vscode

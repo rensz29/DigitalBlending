@@ -1,0 +1,98 @@
+[
+  {
+    "product": "BFSD_OB_HK_3kg",
+    "esm": 11.12,
+    "oil": 0,
+    "starch": 78.88,
+    "wv": 10,
+    "updatedAt": "2026-06-23T00:00:00.000Z"
+  },
+  {
+    "product": "LCM",
+    "esm": 14.52,
+    "oil": 73.77,
+    "starch": 0,
+    "wv": 11.71,
+    "updatedAt": "2026-06-23T00:00:00.000Z"
+  },
+  {
+    "product": "LCM_1kg",
+    "esm": 14.52,
+    "oil": 73.77,
+    "starch": 0,
+    "wv": 11.71,
+    "updatedAt": "2026-06-23T00:00:00.000Z"
+  },
+  {
+    "product": "BFM OB FS",
+    "esm": 29.72,
+    "oil": 64.5,
+    "starch": 0,
+    "wv": 5.78,
+    "updatedAt": "2026-06-23T06:22:51.802Z"
+  },
+  {
+    "product": "BFMM OB",
+    "esm": 29.72,
+    "oil": 64.5,
+    "starch": 0,
+    "wv": 5.78,
+    "updatedAt": "2026-06-23T00:00:00.000Z"
+  },
+  {
+    "product": "BFMM FS",
+    "esm": 29.72,
+    "oil": 64.5,
+    "starch": 0,
+    "wv": 5.78,
+    "updatedAt": "2026-06-23T00:00:00.000Z"
+  },
+  {
+    "product": "BFWM YVETTE",
+    "esm": 20,
+    "oil": 15,
+    "starch": 65,
+    "wv": 0,
+    "updatedAt": "2026-06-23T06:21:35.977Z"
+  },
+  {
+    "product": "HM_Deli_10KG",
+    "esm": 20,
+    "oil": 15,
+    "starch": 65,
+    "wv": 0,
+    "updatedAt": "2026-06-23T00:00:00.000Z"
+  },
+  {
+    "product": "LCM_LEONA",
+    "esm": 14.52,
+    "oil": 73.77,
+    "starch": 0,
+    "wv": 11.71,
+    "updatedAt": "2026-06-23T00:00:00.000Z"
+  },
+  {
+    "product": "BFMM_OBRT",
+    "esm": 29.72,
+    "oil": 64.5,
+    "starch": 0,
+    "wv": 5.78,
+    "updatedAt": "2026-06-23T00:00:00.000Z"
+  },
+  {
+    "product": "HM_Deli_20KG",
+    "esm": 20,
+    "oil": 15,
+    "starch": 65,
+    "wv": 0,
+    "updatedAt": "2026-06-23T00:00:00.000Z"
+  },
+  {
+    "product": "BFSD_OB_HK_15kg",
+    "esm": 11.12,
+    "oil": 0,
+    "starch": 78.88,
+    "wv": 10,
+    "updatedAt": "2026-06-23T00:00:00.000Z"
+  }
+]

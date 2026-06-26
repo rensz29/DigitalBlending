@@ -1,0 +1,51 @@
+# --- Secrets & credentials ---
+.env
+.env.local
+.env.*.local
+server/.env
+server/.env.local
+*.pem
+*.key
+*.p12
+*.pfx
+credentials.json
+secrets.json
+**/secrets/
+
+# Keep env templates (safe to commit)
+!.env.example
+!**/.env.example
+
+# --- Dependencies ---
+node_modules/
+
+# --- Build output ---
+client/dist/
+dist/
+build/
+
+# --- Logs & runtime ---
+*.log
+npm-debug.log*
+logs/
+
+# --- Test & coverage ---
+coverage/
+.nyc_output/
+
+# --- Caches ---
+.vite/
+.cache/
+.eslintcache
+
+# --- OS & editor ---
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# --- Docker local overrides (may contain host-specific config) ---
+docker-compose.override.yml
