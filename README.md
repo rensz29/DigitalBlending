@@ -1,4 +1,4 @@
-# Digital Twin
+# Digital Blending
 
 A single full-stack app that merges two previously separate projects:
 
