@@ -1,4 +1,4 @@
-import { fmtTimeRange } from '../lib/timeBuckets.js';
+import { fmtTimeRange, mergeSegments } from '../lib/timeBuckets.js';
 
 const SKU_PALETTE = [
   '#38bdf8',
@@ -29,27 +29,28 @@ export function colorForSku(sku) {
   return SKU_PALETTE[hashString(sku) % SKU_PALETTE.length];
 }
 
-export default function SkuTimelineRow({ label, segments, range }) {
-  const { unixStart, unixEnd } = range;
-  const total = unixEnd - unixStart || 1;
+export default function SkuTimelineRow({ label, segments }) {
+  const merged = mergeSegments(segments);
 
   return (
     <div className="timeline-row overview-row">
       <div className="timeline-label">{label}</div>
       <div className="timeline-band">
-        {!segments || segments.length === 0 ? (
+        {merged.length === 0 ? (
           <div
             className="timeline-seg"
-            style={{ width: '100%', background: EMPTY_COLOR }}
+            style={{ flex: 1, background: EMPTY_COLOR }}
             title="No data"
           />
         ) : (
-          segments.map((s, i) => (
+          merged.map((s, i) => (
             <div
               key={i}
               className="timeline-seg sku-seg"
               style={{
-                width: `${((s.end - s.start) / total) * 100}%`,
+                flexGrow: s.end - s.start,
+                flexShrink: 0,
+                flexBasis: 0,
                 background: colorForSku(s.value),
               }}
               title={`${fmtTimeRange(s.start, s.end)}: ${s.value}`}

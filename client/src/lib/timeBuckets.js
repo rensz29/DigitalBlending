@@ -36,6 +36,24 @@ export function fmtTimeRange(start, end) {
   return `${fmtTime(start, includeSeconds)}–${fmtTime(end, includeSeconds)}`;
 }
 
+// Collapse consecutive segments that share the same value into one contiguous
+// segment. Keeps timeline bars lightweight (esp. at second-level intervals,
+// where a long unchanging run would otherwise emit one node per bucket).
+export function mergeSegments(segments) {
+  if (!segments || segments.length === 0) return [];
+  const merged = [{ ...segments[0] }];
+  for (let i = 1; i < segments.length; i++) {
+    const prev = merged[merged.length - 1];
+    const cur = segments[i];
+    if (Object.is(cur.value, prev.value) && cur.start <= prev.end) {
+      prev.end = cur.end;
+    } else {
+      merged.push({ ...cur });
+    }
+  }
+  return merged;
+}
+
 export function buildSegments(points, start, end) {
   if (!points || points.length === 0) return [];
   const segs = [];

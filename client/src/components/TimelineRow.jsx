@@ -1,29 +1,27 @@
-import { fmtTime } from '../lib/timeBuckets.js';
+import { fmtTime, mergeSegments } from '../lib/timeBuckets.js';
 
 export default function TimelineRow({
   label,
   segments,
-  range,
   activeColor,
   inactiveColor,
   isActive,
   formatTitle,
 }) {
-  const { unixStart, unixEnd } = range;
-  const total = unixEnd - unixStart || 1;
+  const merged = mergeSegments(segments);
 
   return (
     <div className="timeline-row overview-row">
       <div className="timeline-label">{label}</div>
       <div className="timeline-band">
-        {!segments || segments.length === 0 ? (
+        {merged.length === 0 ? (
           <div
             className="timeline-seg"
-            style={{ width: '100%', background: '#334155' }}
+            style={{ flex: 1, background: '#334155' }}
             title="No data"
           />
         ) : (
-          segments.map((s, i) => {
+          merged.map((s, i) => {
             const active = isActive(s.value);
             const title = formatTitle
               ? formatTitle(s)
@@ -33,7 +31,9 @@ export default function TimelineRow({
                 key={i}
                 className="timeline-seg"
                 style={{
-                  width: `${((s.end - s.start) / total) * 100}%`,
+                  flexGrow: s.end - s.start,
+                  flexShrink: 0,
+                  flexBasis: 0,
                   background: active ? activeColor : inactiveColor,
                 }}
                 title={title}
