@@ -201,7 +201,7 @@ export function bucketClStatusSegments(points, range, bucketSeconds, parseCode) 
   });
 }
 
-function averageFlowInRange(points, start, end) {
+export function averageFlowInRange(points, start, end) {
   const segs = buildSegments(points, start, end);
   let weightedSum = 0;
   let totalSeconds = 0;

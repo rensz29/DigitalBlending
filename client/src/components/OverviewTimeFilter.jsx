@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { viewRangeFromTimes, isFullShift } from '../lib/shiftWindow.js';
+import Spinner from './Spinner.jsx';
 
 export default function OverviewTimeFilter({
   shiftRange,
@@ -8,6 +9,7 @@ export default function OverviewTimeFilter({
   viewRange,
   onApply,
   onReset,
+  processing = false,
 }) {
   const [fromTime, setFromTime] = useState(shiftRange?.startLabel ?? '');
   const [toTime, setToTime] = useState(shiftRange?.endLabel ?? '');
@@ -66,10 +68,13 @@ export default function OverviewTimeFilter({
           }}
         />
       </div>
-      <button type="button" className="load-btn" onClick={apply}>
-        Apply
+      <button type="button" className="load-btn" onClick={apply} disabled={processing}>
+        <span className="load-btn-inner">
+          {processing && <Spinner size={16} />}
+          {processing ? 'Processing…' : 'Apply'}
+        </span>
       </button>
-      <button type="button" className="btn-secondary" onClick={reset} disabled={!filtered}>
+      <button type="button" className="btn-secondary" onClick={reset} disabled={!filtered || processing}>
         Reset
       </button>
       {filtered && (

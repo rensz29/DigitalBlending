@@ -2,7 +2,15 @@
 // `key` is the short id used throughout the app; `full` is the historian path.
 
 export const TAG_PREFIX =
-  'Unilever_Ph_Nutrition.Dressings_Halal.Process.Continuous_Line_03.Nirvana.Digital_Blending.';
+  'Unilever_Ph_Nutrition.Dressings_Halal.Process.Continuous_Line_03.Digital_Blending_02.';
+
+export const WASTEWISE_PREFIX =
+  'Unilever_Ph_Nutrition.Dressings_Halal.Process.Continuous_Line_03.Wastewise.';
+
+// Measurement units for the density/temp tags. Density unit confirmed from the
+// live tag magnitude (≈1 → kg/L).
+export const DENSITY_UNIT = 'kg/L';
+export const TEMP_UNIT = '°C';
 
 export const TAGS = [
   {
@@ -97,6 +105,41 @@ export const TAGS = [
     kind: 'numeric',
     unit: 'kg/min',
   },
+  // --- Density & Temperature (per ingredient) ---
+  { key: 'esmDensity', name: 'ESM_Density', label: 'ESM Density', kind: 'numeric', unit: DENSITY_UNIT },
+  { key: 'esmTemp', name: 'ESM_Temp', label: 'ESM Temp', kind: 'numeric', unit: TEMP_UNIT },
+  { key: 'oilDensity', name: 'Oil_Density', label: 'Oil Density', kind: 'numeric', unit: DENSITY_UNIT },
+  { key: 'oilTemp', name: 'Oil_Temp', label: 'Oil Temp', kind: 'numeric', unit: TEMP_UNIT },
+  { key: 'wvDensity', name: 'WV_Density', label: 'Water Vinegar Density', kind: 'numeric', unit: DENSITY_UNIT },
+  { key: 'wvTemp', name: 'WV_Temp', label: 'Water Vinegar Temp', kind: 'numeric', unit: TEMP_UNIT },
+  { key: 'starchDensity', name: 'Starch_Density', label: 'Starch Density', kind: 'numeric', unit: DENSITY_UNIT },
+  { key: 'starchTemp', name: 'Starch_Temp', label: 'Starch Temp', kind: 'numeric', unit: TEMP_UNIT },
+  // --- Wastewise (separate tag prefix + fetch group) ---
+  {
+    key: 'clModeDesc',
+    name: 'CL_Mode_Desc',
+    label: 'CL Mode',
+    kind: 'category',
+    prefix: WASTEWISE_PREFIX,
+    group: 'wastewise',
+  },
+  {
+    key: 'forwardflowTotalKg',
+    name: 'Overall_Forwardflow_Total_Kg',
+    label: 'Overall Forwardflow (kg)',
+    kind: 'numeric',
+    unit: 'kg',
+    prefix: WASTEWISE_PREFIX,
+    group: 'wastewise',
+  },
+  {
+    key: 'wasteValve',
+    name: 'Waste_Valve_Status',
+    label: 'Waste Valve',
+    kind: 'state',
+    prefix: WASTEWISE_PREFIX,
+    group: 'wastewise',
+  },
 ];
 
 export const INGREDIENTS = [
@@ -106,6 +149,8 @@ export const INGREDIENTS = [
     dosedKey: 'esmDosed',
     valveKey: 'valve',
     flowKey: 'esmFlow',
+    densityKey: 'esmDensity',
+    tempKey: 'esmTemp',
     kgField: 'esmKg',
     color: '#38bdf8',
   },
@@ -115,6 +160,8 @@ export const INGREDIENTS = [
     dosedKey: 'oilDosed',
     valveKey: 'oilValve',
     flowKey: 'oilFlow',
+    densityKey: 'oilDensity',
+    tempKey: 'oilTemp',
     kgField: 'oilKg',
     color: '#f97316',
   },
@@ -124,6 +171,8 @@ export const INGREDIENTS = [
     dosedKey: 'wvDosed',
     valveKey: 'wvValve',
     flowKey: 'wvFlow',
+    densityKey: 'wvDensity',
+    tempKey: 'wvTemp',
     kgField: 'wvKg',
     color: '#a78bfa',
   },
@@ -133,19 +182,36 @@ export const INGREDIENTS = [
     dosedKey: 'starchDosed',
     valveKey: 'starchValve',
     flowKey: 'starchFlow',
+    densityKey: 'starchDensity',
+    tempKey: 'starchTemp',
     kgField: 'starchKg',
     color: '#fbbf24',
   },
 ];
 
-export const TAG_FULLNAMES = TAGS.map((t) => TAG_PREFIX + t.name);
+export const fullnameFor = (t) => (t.prefix ?? TAG_PREFIX) + t.name;
 
-// Map a historian fullname (or bare name) back to our short key.
+export const TAG_FULLNAMES = TAGS.map(fullnameFor);
+
+// Tags fetched for the History/ingredients query (everything except Wastewise).
+export const SHIFT_TAG_FULLNAMES = TAGS.filter((t) => t.group !== 'wastewise').map(fullnameFor);
+
+// Tags fetched for the Wastewise query: the Wastewise tags plus SKU_Running
+// (needed to attribute waste per SKU).
+export const WASTE_TAG_FULLNAMES = TAGS.filter(
+  (t) => t.group === 'wastewise' || t.key === 'sku'
+).map(fullnameFor);
+
+// Map a historian fullname (or bare name) back to our short key. Prefix-agnostic
+// so tags under either prefix (Digital_Blending_02 / Wastewise) resolve. Tag
+// `name`s are unique, so a trailing-name match is safe.
 export function keyForTagname(tagname) {
-  const bare = tagname.startsWith(TAG_PREFIX)
-    ? tagname.slice(TAG_PREFIX.length)
-    : tagname;
-  const match = TAGS.find((t) => t.name === bare);
+  const match = TAGS.find(
+    (t) =>
+      tagname === (t.prefix ?? TAG_PREFIX) + t.name ||
+      tagname.endsWith('.' + t.name) ||
+      tagname === t.name
+  );
   return match ? match.key : null;
 }
 

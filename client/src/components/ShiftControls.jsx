@@ -4,6 +4,8 @@ const SHIFTS = [
   { id: 3, label: 'Shift 3', time: '10pm–6am' },
 ];
 
+import Spinner from './Spinner.jsx';
+
 export default function ShiftControls({
   date,
   shift,
@@ -44,7 +46,10 @@ export default function ShiftControls({
       </div>
 
       <button className="load-btn" onClick={onLoad} disabled={loading}>
-        {loading ? 'Loading…' : 'Load'}
+        <span className="load-btn-inner">
+          {loading && <Spinner size={16} />}
+          {loading ? 'Loading…' : 'Load'}
+        </span>
       </button>
     </div>
   );

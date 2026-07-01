@@ -2,15 +2,14 @@ import { Router } from 'express';
 import { shiftRange, SHIFTS, formatLocalTime } from '../lib/shifts.js';
 import { fetchHistorian } from '../lib/piClient.js';
 import { normalize } from '../lib/normalize.js';
-import { computeMetrics } from '../lib/metrics.js';
-import { INGREDIENTS, SHIFT_TAG_FULLNAMES } from '../lib/tags.js';
-import { listRecipes } from '../lib/recipesStore.js';
-import { compareToTargets } from '../lib/recipeComparison.js';
-import { listClStatuses, getRunningCodes } from '../lib/clStatusStore.js';
+import { computeWaste } from '../lib/wasteMetrics.js';
+import { WASTE_TAG_FULLNAMES } from '../lib/tags.js';
 
 const router = Router();
 
-router.get('/shift-data', async (req, res) => {
+// Wastewise is fetched separately (lazily, on tab open) so the History /
+// ingredients query does not carry the Wastewise tags.
+router.get('/waste-data', async (req, res) => {
   const { date, shift } = req.query;
 
   if (!date || !/^\d{4}-\d{2}-\d{2}$/.test(date)) {
@@ -32,13 +31,9 @@ router.get('/shift-data', async (req, res) => {
   }
 
   try {
-    const raw = await fetchHistorian(range.unixStart, range.unixEnd, SHIFT_TAG_FULLNAMES);
+    const raw = await fetchHistorian(range.unixStart, range.unixEnd, WASTE_TAG_FULLNAMES);
     const series = normalize(raw);
-    const clStatuses = await listClStatuses();
-    const runningStatusCodes = getRunningCodes(clStatuses);
-    const { kpis, skuBreakdown } = computeMetrics(series, range, { runningStatusCodes });
-    const recipes = await listRecipes();
-    const recipeComparison = compareToTargets(skuBreakdown, recipes);
+    const waste = computeWaste(series, range);
 
     return res.json({
       date,
@@ -49,12 +44,7 @@ router.get('/shift-data', async (req, res) => {
         startLabel: formatLocalTime(range.unixStart),
         endLabel: formatLocalTime(range.unixEnd),
       },
-      series,
-      kpis,
-      skuBreakdown,
-      recipeComparison,
-      clStatuses,
-      ingredients: INGREDIENTS,
+      waste,
     });
   } catch (err) {
     const status = err.response?.status || 502;

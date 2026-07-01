@@ -19,12 +19,12 @@ const RUNNING = /^(run|running|on|true|1|started|auto)$/i;
 const OPEN = /^(open|opened|on|true|1)$/i;
 
 const isRunning = (v) => isTruthyState(v, RUNNING);
-const isOpen = (v) => isTruthyState(v, OPEN);
+export const isOpen = (v) => isTruthyState(v, OPEN);
 
 // --- time helpers --------------------------------------------------------
 
 // Step-function value active at time t (last sample at or before t).
-function valueAt(points, t) {
+export function valueAt(points, t) {
   let v;
   for (const p of points) {
     if (p.t <= t) v = p.value;
@@ -118,6 +118,14 @@ function avgFlowField(id) {
   return `avg${id.charAt(0).toUpperCase() + id.slice(1)}FlowKgpm`;
 }
 
+function avgDensityField(id) {
+  return `avg${id.charAt(0).toUpperCase() + id.slice(1)}Density`;
+}
+
+function avgTempField(id) {
+  return `avg${id.charAt(0).toUpperCase() + id.slice(1)}Temp`;
+}
+
 export function averageFlowrateKgpm(points, start, end) {
   if (!points?.length) return 0;
 
@@ -182,6 +190,8 @@ export function computeMetrics(series, range, options = {}) {
     const dosed = series[ing.dosedKey] || [];
     const valve = series[ing.valveKey] || [];
     const flow = series[ing.flowKey] || [];
+    const density = series[ing.densityKey] || [];
+    const temp = series[ing.tempKey] || [];
     const totalKg = accumulate(dosed);
     const valveOpenSeconds = activeSeconds(valve, isOpen, unixStart, unixEnd);
 
@@ -189,6 +199,9 @@ export function computeMetrics(series, range, options = {}) {
     kpis[valveSecondsField(ing.id)] = valveOpenSeconds;
     kpis[valvePctField(ing.id)] = round((valveOpenSeconds / duration) * 100, 1);
     kpis[avgFlowField(ing.id)] = averageFlowrateKgpm(flow, unixStart, unixEnd);
+    // averageFlowrateKgpm is a generic time-weighted average of a numeric series.
+    kpis[avgDensityField(ing.id)] = averageFlowrateKgpm(density, unixStart, unixEnd);
+    kpis[avgTempField(ing.id)] = averageFlowrateKgpm(temp, unixStart, unixEnd);
 
     return { kgField: ing.kgField, map: dosedBySku(dosed, sku) };
   });

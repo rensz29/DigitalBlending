@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, useTransition } from 'react';
 import {
   BUCKET_OPTIONS,
   DEFAULT_BUCKET_SECONDS,
@@ -10,6 +10,7 @@ import {
   bucketClStatusSegments,
   bucketFlowrateSeries,
   bucketValveDutySeries,
+  averageFlowInRange,
 } from '../lib/timeBuckets.js';
 import { parseClStatusCode, colorForStatus, formatStatusLabel } from '../lib/clStatus.js';
 import TimelineRow, { matchesState, OPEN, isBucketActive } from './TimelineRow.jsx';
@@ -17,6 +18,17 @@ import SkuTimelineRow, { colorForSku } from './SkuTimelineRow.jsx';
 import ClStatusTimelineRow from './ClStatusTimelineRow.jsx';
 import BucketedDosedChart from './BucketedDosedChart.jsx';
 import OverviewTimeFilter from './OverviewTimeFilter.jsx';
+import LoadingOverlay from './LoadingOverlay.jsx';
+import { ActivityIcon, GaugeIcon, ThermometerIcon } from './icons.jsx';
+import { formatNumber, DENSITY_UNIT, TEMP_UNIT, FLOW_RATE_UNIT } from '../utils/format.js';
+
+// Optional charts, hidden by default (the Dosed chart is always shown).
+const OPTIONAL_CHARTS = [
+  { id: 'flowrate', label: 'Flowrate' },
+  { id: 'valve', label: 'Dosing Valve' },
+  { id: 'density', label: 'Density' },
+  { id: 'temp', label: 'Temp' },
+];
 
 export default function IngredientOverviewPanel({
   series,
@@ -26,15 +38,29 @@ export default function IngredientOverviewPanel({
   ingredients,
   clStatuses,
 }) {
+  const [isPending, startTransition] = useTransition();
   const [activeIngredient, setActiveIngredient] = useState(ingredients?.[0]?.id ?? 'esm');
   const [bucketSeconds, setBucketSeconds] = useState(DEFAULT_BUCKET_SECONDS);
   const [doseDisplayMode, setDoseDisplayMode] = useState(DEFAULT_DOSE_DISPLAY);
-  const [showValveChart, setShowValveChart] = useState(true);
+  const [visibleCharts, setVisibleCharts] = useState(() => new Set());
   const [viewRange, setViewRange] = useState(shiftRange);
 
+  const toggleChart = (id) =>
+    setVisibleCharts((prev) => {
+      const next = new Set(prev);
+      next.has(id) ? next.delete(id) : next.add(id);
+      return next;
+    });
+
   useEffect(() => {
-    setViewRange(shiftRange);
+    startTransition(() => setViewRange(shiftRange));
   }, [shiftRange, date, shift]);
+
+  const updateViewRange = (range) => startTransition(() => setViewRange(range));
+  const resetViewRange = () => startTransition(() => setViewRange(shiftRange));
+  const selectIngredient = (id) => startTransition(() => setActiveIngredient(id));
+  const selectBucket = (seconds) => startTransition(() => setBucketSeconds(seconds));
+  const selectDoseMode = (mode) => startTransition(() => setDoseDisplayMode(mode));
 
   const ingredient = (ingredients || []).find((ing) => ing.id === activeIngredient);
 
@@ -83,6 +109,26 @@ export default function IngredientOverviewPanel({
     );
   }, [ingredient, viewRange, series, bucketSeconds]);
 
+  const densityData = useMemo(() => {
+    if (!ingredient || !viewRange) return [];
+    return bucketFlowrateSeries(series?.[ingredient.densityKey], viewRange, bucketSeconds);
+  }, [ingredient, viewRange, series, bucketSeconds]);
+
+  const tempData = useMemo(() => {
+    if (!ingredient || !viewRange) return [];
+    return bucketFlowrateSeries(series?.[ingredient.tempKey], viewRange, bucketSeconds);
+  }, [ingredient, viewRange, series, bucketSeconds]);
+
+  const viewAverages = useMemo(() => {
+    if (!ingredient || !viewRange) return { avgFlow: 0, avgDensity: 0, avgTemp: 0 };
+    const { unixStart, unixEnd } = viewRange;
+    return {
+      avgFlow: averageFlowInRange(series?.[ingredient.flowKey], unixStart, unixEnd),
+      avgDensity: averageFlowInRange(series?.[ingredient.densityKey], unixStart, unixEnd),
+      avgTemp: averageFlowInRange(series?.[ingredient.tempKey], unixStart, unixEnd),
+    };
+  }, [ingredient, viewRange, series]);
+
   const skuSegments = useMemo(() => {
     if (!viewRange) return [];
     return bucketSkuSegments(series?.sku, viewRange, bucketSeconds);
@@ -111,8 +157,9 @@ export default function IngredientOverviewPanel({
         date={date}
         shift={shift}
         viewRange={viewRange}
-        onApply={setViewRange}
-        onReset={() => setViewRange(shiftRange)}
+        onApply={updateViewRange}
+        onReset={resetViewRange}
+        processing={isPending}
       />
 
       <div className="overview-toolbar">
@@ -124,7 +171,7 @@ export default function IngredientOverviewPanel({
               role="tab"
               aria-selected={activeIngredient === ing.id}
               className={activeIngredient === ing.id ? 'tab-btn active' : 'tab-btn'}
-              onClick={() => setActiveIngredient(ing.id)}
+              onClick={() => selectIngredient(ing.id)}
             >
               {ing.label}
             </button>
@@ -139,7 +186,7 @@ export default function IngredientOverviewPanel({
                 key={opt.seconds}
                 type="button"
                 className={bucketSeconds === opt.seconds ? 'shift-btn active' : 'shift-btn'}
-                onClick={() => setBucketSeconds(opt.seconds)}
+                onClick={() => selectBucket(opt.seconds)}
               >
                 {opt.label}
               </button>
@@ -155,7 +202,7 @@ export default function IngredientOverviewPanel({
                 key={opt.id}
                 type="button"
                 className={doseDisplayMode === opt.id ? 'shift-btn active' : 'shift-btn'}
-                onClick={() => setDoseDisplayMode(opt.id)}
+                onClick={() => selectDoseMode(opt.id)}
               >
                 {opt.label}
               </button>
@@ -164,27 +211,63 @@ export default function IngredientOverviewPanel({
         </div>
 
         <div className="field overview-bucket-field">
-          <label>Dosing valve graph</label>
+          <label>Show graphs</label>
           <div className="shift-group">
-            <button
-              type="button"
-              className={showValveChart ? 'shift-btn active' : 'shift-btn'}
-              onClick={() => setShowValveChart(true)}
-            >
-              Show
-            </button>
-            <button
-              type="button"
-              className={!showValveChart ? 'shift-btn active' : 'shift-btn'}
-              onClick={() => setShowValveChart(false)}
-            >
-              Hide
-            </button>
+            {OPTIONAL_CHARTS.map((c) => (
+              <button
+                key={c.id}
+                type="button"
+                aria-pressed={visibleCharts.has(c.id)}
+                className={visibleCharts.has(c.id) ? 'shift-btn active' : 'shift-btn'}
+                onClick={() => toggleChart(c.id)}
+              >
+                {c.label}
+              </button>
+            ))}
           </div>
         </div>
       </div>
 
-      <div className="ingredient-overview-tracks">
+      <div className="panel-loading-host" aria-busy={isPending || undefined}>
+        {isPending && <LoadingOverlay message="Processing…" />}
+
+        <div className="kpi-grid" style={{ marginBottom: 'var(--space-4)' }}>
+        <div className="kpi-card">
+          <div className="kpi-card-head">
+            <span className="kpi-card-icon" style={{ color: ingredient.color }}>
+              <ActivityIcon size={18} />
+            </span>
+            <div className="value" style={{ color: ingredient.color }}>
+              {formatNumber(viewAverages.avgFlow, 1)}
+            </div>
+          </div>
+          <div className="label">{ingredient.label} Avg Flowrate ({FLOW_RATE_UNIT})</div>
+        </div>
+        <div className="kpi-card">
+          <div className="kpi-card-head">
+            <span className="kpi-card-icon" style={{ color: ingredient.color }}>
+              <GaugeIcon size={18} />
+            </span>
+            <div className="value" style={{ color: ingredient.color }}>
+              {formatNumber(viewAverages.avgDensity, 2)}
+            </div>
+          </div>
+          <div className="label">{ingredient.label} Avg Density ({DENSITY_UNIT})</div>
+        </div>
+        <div className="kpi-card">
+          <div className="kpi-card-head">
+            <span className="kpi-card-icon" style={{ color: ingredient.color }}>
+              <ThermometerIcon size={18} />
+            </span>
+            <div className="value" style={{ color: ingredient.color }}>
+              {formatNumber(viewAverages.avgTemp, 1)}
+            </div>
+          </div>
+          <div className="label">{ingredient.label} Avg Temp ({TEMP_UNIT})</div>
+        </div>
+      </div>
+
+        <div className="ingredient-overview-tracks">
         <BucketedDosedChart
           label={`${ingredient.label} Dosed`}
           data={dosedData}
@@ -194,17 +277,19 @@ export default function IngredientOverviewPanel({
           bucketSeconds={bucketSeconds}
         />
 
-        <BucketedDosedChart
-          label={`${ingredient.label} Flowrate`}
-          data={flowrateData}
-          range={viewRange}
-          color={ingredient.color}
-          unit=" kg/min"
-          valueLabel="Flowrate"
-          bucketSeconds={bucketSeconds}
-        />
+        {visibleCharts.has('flowrate') && (
+          <BucketedDosedChart
+            label={`${ingredient.label} Flowrate`}
+            data={flowrateData}
+            range={viewRange}
+            color={ingredient.color}
+            unit=" kg/min"
+            valueLabel="Flowrate"
+            bucketSeconds={bucketSeconds}
+          />
+        )}
 
-        {showValveChart && (
+        {visibleCharts.has('valve') && (
           <BucketedDosedChart
             label={`${ingredient.label} Dosing Valve`}
             data={valveChartData}
@@ -214,6 +299,30 @@ export default function IngredientOverviewPanel({
             valueLabel="Valve open"
             bucketSeconds={bucketSeconds}
             yDomain={[0, 100]}
+          />
+        )}
+
+        {visibleCharts.has('density') && (
+          <BucketedDosedChart
+            label={`${ingredient.label} Density`}
+            data={densityData}
+            range={viewRange}
+            color={ingredient.color}
+            unit={` ${DENSITY_UNIT}`}
+            valueLabel="Density"
+            bucketSeconds={bucketSeconds}
+          />
+        )}
+
+        {visibleCharts.has('temp') && (
+          <BucketedDosedChart
+            label={`${ingredient.label} Temp`}
+            data={tempData}
+            range={viewRange}
+            color={ingredient.color}
+            unit={` ${TEMP_UNIT}`}
+            valueLabel="Temp"
+            bucketSeconds={bucketSeconds}
           />
         )}
 
@@ -242,6 +351,7 @@ export default function IngredientOverviewPanel({
           <span>{viewRange.startLabel}</span>
           <span>{viewRange.endLabel}</span>
         </div>
+      </div>
       </div>
 
       <div className="legend">

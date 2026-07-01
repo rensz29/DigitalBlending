@@ -9,13 +9,16 @@ const BASE =
   process.env.PI_API_BASE ||
   'http://10.156.116.179:4516/api/datasets/dressings/data';
 
-export async function fetchShiftData(unixStart, unixEnd) {
+// Fetch a specific set of historian tag fullnames over [unixStart, unixEnd].
+// Callers pass the tag group they need (e.g. blending vs wastewise) so each
+// query only carries the tags it uses.
+export async function fetchHistorian(unixStart, unixEnd, fullnames = TAG_FULLNAMES) {
   const token = process.env.PI_BEARER_TOKEN;
   const useAuth =
     token && token !== 'replace-with-real-token' && token.trim() !== '';
 
   const params = new URLSearchParams();
-  TAG_FULLNAMES.forEach((t) => params.append('tagname', t));
+  fullnames.forEach((t) => params.append('tagname', t));
   params.append('unixStart', String(unixStart));
   params.append('unixEnd', String(unixEnd));
 

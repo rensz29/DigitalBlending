@@ -92,6 +92,20 @@ const raw = [
       { unixTime: start + 14400, value: 20 }, // 10 kg/min for 4h, then 20 for 4h
     ],
   },
+  {
+    tagname: TAG_PREFIX + 'ESM_Density',
+    values: [
+      { unixTime: start, value: 1.0 },
+      { unixTime: start + 14400, value: 1.2 }, // 1.0 for 4h, 1.2 for 4h -> avg 1.1
+    ],
+  },
+  {
+    tagname: TAG_PREFIX + 'ESM_Temp',
+    values: [
+      { unixTime: start, value: 20 },
+      { unixTime: start + 14400, value: 30 }, // 20 for 4h, 30 for 4h -> avg 25
+    ],
+  },
 ];
 
 test('normalize maps tags to short keys and sorts points', () => {
@@ -132,4 +146,6 @@ test('computeMetrics derives expected KPIs', () => {
   assert.equal(bySku['SKU-A'].starchKg, 3);
   assert.equal(bySku['SKU-B'].starchKg, 5);
   assert.equal(kpis.avgEsmFlowKgpm, 15); // time-weighted avg of 10 and 20 over 8h
+  assert.equal(kpis.avgEsmDensity, 1.1); // time-weighted avg of 1.0 and 1.2 over 8h
+  assert.equal(kpis.avgEsmTemp, 25); // time-weighted avg of 20 and 30 over 8h
 });

@@ -115,6 +115,12 @@ export const TimerIcon = (p) => (
   </Icon>
 );
 
+export const ThermometerIcon = (p) => (
+  <Icon {...p}>
+    <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z" />
+  </Icon>
+);
+
 export const AlertTriangleIcon = (p) => (
   <Icon {...p}>
     <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />

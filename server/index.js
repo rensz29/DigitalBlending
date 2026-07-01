@@ -6,6 +6,7 @@ import { createServer } from 'http';
 import { fileURLToPath } from 'url';
 import { WebSocketServer } from 'ws';
 import shiftDataRouter from './routes/shift-data.js';
+import wasteDataRouter from './routes/waste-data.js';
 import recipesRouter from './routes/recipes.js';
 import ingredientPricesRouter from './routes/ingredient-prices.js';
 import clStatusesRouter from './routes/cl-statuses.js';
@@ -26,6 +27,7 @@ app.use(express.json());
 
 // Digital Blending (PI historian) API
 app.use('/api', shiftDataRouter);
+app.use('/api', wasteDataRouter);
 app.use('/api', recipesRouter);
 app.use('/api', ingredientPricesRouter);
 app.use('/api', clStatusesRouter);

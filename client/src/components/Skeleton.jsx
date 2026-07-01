@@ -33,3 +33,16 @@ export function SkeletonCards({ count = 4, height = 96 }) {
     </div>
   );
 }
+
+export function SkeletonOverview() {
+  return (
+    <div className="skeleton-overview">
+      <Skeleton height={24} width="30%" />
+      <Skeleton height={40} width="100%" />
+      <SkeletonCards count={3} height={80} />
+      <Skeleton className="skeleton-overview-chart" />
+      <Skeleton height={48} />
+      <Skeleton height={48} />
+    </div>
+  );
+}
