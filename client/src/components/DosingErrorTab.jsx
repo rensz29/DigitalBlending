@@ -1,15 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
-import WastePanel from './WastePanel.jsx';
+import DosingErrorChart from './DosingErrorChart.jsx';
 import EmptyState from './EmptyState.jsx';
 import { SkeletonText, SkeletonOverview } from './Skeleton.jsx';
 import LoadingOverlay from './LoadingOverlay.jsx';
-import { AlertTriangleIcon, DropletIcon } from './icons.jsx';
-import WasteSaveButton from './WasteSaveButton.jsx';
+import { AlertTriangleIcon, DashboardIcon } from './icons.jsx';
 
-// Lazily fetches /api/waste-data for the given date/shift. Mounted only after
-// the Wastewise tab is first opened, so the Wastewise tags are never queried on
-// the ingredients/History load. Refetches only when date/shift change.
-export default function WasteTab({ date, shift }) {
+// Lazily fetches /api/dosing-error-data for the given date/shift.
+// Mounted only after the Dosing Error tab is first opened.
+export default function DosingErrorTab({ date, shift }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
@@ -17,14 +15,14 @@ export default function WasteTab({ date, shift }) {
 
   useEffect(() => {
     const key = `${date}|${shift}`;
-    if (lastKey.current === key) return; // already loaded for this selection
+    if (lastKey.current === key) return;
     let cancelled = false;
 
     async function load() {
       setLoading(true);
       setError(null);
       try {
-        const res = await fetch(`/api/waste-data?date=${date}&shift=${shift}`);
+        const res = await fetch(`/api/dosing-error-data?date=${date}&shift=${shift}`);
         const body = await res.json();
         if (!res.ok) throw new Error(body.error || `Request failed (${res.status})`);
         if (!cancelled) {
@@ -73,9 +71,9 @@ export default function WasteTab({ date, shift }) {
     return (
       <div className="panel">
         <EmptyState
-          icon={DropletIcon}
-          title="No waste data"
-          hint="Pick a date and shift above to load Wastewise."
+          icon={DashboardIcon}
+          title="No shift loaded yet"
+          hint="Pick a date and shift above, then press Load to view dosing error graph."
         />
       </div>
     );
@@ -83,12 +81,9 @@ export default function WasteTab({ date, shift }) {
 
   return (
     <div className="panel-loading-host" aria-busy={loading || undefined}>
-      {loading && <LoadingOverlay message="Loading waste data…" />}
-      <WastePanel
-        waste={data.waste}
-        range={data.range}
-        saveControl={<WasteSaveButton date={date} shift={shift} totalKg={data?.waste?.totalKg} />}
-      />
+      {loading && <LoadingOverlay message="Loading dosing error…" />}
+      <DosingErrorChart windows={data.dosingErrorWindows || []} range={data.range} />
     </div>
   );
 }
+

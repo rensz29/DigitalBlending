@@ -7,6 +7,7 @@ import { INGREDIENTS, SHIFT_TAG_FULLNAMES } from '../lib/tags.js';
 import { listRecipes } from '../lib/recipesStore.js';
 import { compareToTargets } from '../lib/recipeComparison.js';
 import { listClStatuses, getRunningCodes } from '../lib/clStatusStore.js';
+import { computeDosingErrorsByWindow } from '../lib/dosingErrorByWindow.js';
 
 const router = Router();
 
@@ -39,6 +40,7 @@ router.get('/shift-data', async (req, res) => {
     const { kpis, skuBreakdown } = computeMetrics(series, range, { runningStatusCodes });
     const recipes = await listRecipes();
     const recipeComparison = compareToTargets(skuBreakdown, recipes);
+    const dosingErrorWindows = computeDosingErrorsByWindow(series, range, recipes);
 
     return res.json({
       date,
@@ -53,6 +55,7 @@ router.get('/shift-data', async (req, res) => {
       kpis,
       skuBreakdown,
       recipeComparison,
+      dosingErrorWindows,
       clStatuses,
       ingredients: INGREDIENTS,
     });

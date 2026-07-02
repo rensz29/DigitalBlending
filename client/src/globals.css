@@ -46,6 +46,9 @@
   --sidebar-w: 244px;
   --sidebar-w-collapsed: 72px;
   --topbar-h: 60px;
+  --content-gutter: var(--space-6);
+  --content-max: 1760px;
+  --content-width: min(var(--content-max), 100%);
 
   /* Composed shadows (color supplied per theme) */
   --shadow-sm: 0 1px 2px var(--shadow-color), 0 1px 3px var(--shadow-color);
@@ -378,15 +381,23 @@ a {
   height: var(--topbar-h);
   flex-shrink: 0;
   display: flex;
+  justify-content: center;
   align-items: center;
-  gap: var(--space-4);
-  padding: 0 var(--space-6);
+  padding: 0 var(--content-gutter);
   background: color-mix(in srgb, var(--bg-2) 80%, transparent);
   border-bottom: 1px solid var(--border);
   backdrop-filter: blur(8px);
   position: sticky;
   top: 0;
   z-index: 20;
+}
+
+.topbar-inner {
+  width: 100%;
+  max-width: var(--content-width);
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
 }
 
 .topbar-title {
@@ -449,14 +460,14 @@ a {
   flex: 1;
   min-height: 0;
   overflow-y: auto;
-  padding: var(--space-6);
+  padding: var(--content-gutter);
   display: flex;
   flex-direction: column;
 }
 
 .page {
   width: 100%;
-  max-width: 1320px;
+  max-width: var(--content-width);
   margin: 0 auto;
   flex-shrink: 0;
   animation: fade-in 0.24s var(--ease);
@@ -480,7 +491,8 @@ a {
 
 /* legacy container (still used as a safe fallback) */
 .container {
-  max-width: 1320px;
+  width: 100%;
+  max-width: var(--content-width);
   margin: 0 auto;
 }
 
@@ -1123,6 +1135,52 @@ input.is-invalid,
   font-size: var(--text-base);
 }
 
+.dosing-error-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.dosing-error-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+}
+
+.dosing-error-legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.dosing-error-chart-wrap {
+  width: 100%;
+  min-height: 280px;
+}
+
+.dosing-error-multi-chart {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+.dosing-error-chart-item {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+}
+
+.dosing-error-tooltip {
+  display: grid;
+  gap: 2px;
+  font-size: var(--text-sm);
+  line-height: 1.35;
+}
+
 /* =========================================================================
    Ingredient overview
    ========================================================================= */
@@ -1371,6 +1429,17 @@ input.is-invalid,
    Responsive
    ========================================================================= */
 
+@media (min-width: 1280px) {
+  .app-content {
+    padding-block: var(--space-6);
+    padding-inline: clamp(var(--space-4), 1.5vw, var(--space-6));
+  }
+
+  .app-topbar {
+    padding-inline: clamp(var(--space-4), 1.5vw, var(--space-6));
+  }
+}
+
 @media (max-width: 1024px) {
   .app-sidebar:not(.mobile-open) {
     width: var(--sidebar-w-collapsed);
@@ -1382,6 +1451,9 @@ input.is-invalid,
   }
   .app-sidebar:not(.mobile-open) .sidebar-link {
     justify-content: center;
+  }
+  .dosing-error-multi-chart {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -1417,6 +1489,9 @@ input.is-invalid,
   }
   .app-content {
     padding: var(--space-4);
+  }
+  .app-topbar {
+    padding-inline: var(--space-4);
   }
   .overview-toolbar {
     flex-direction: column;

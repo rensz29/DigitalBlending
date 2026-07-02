@@ -1,0 +1,1210 @@
+[
+  {
+    "date": "2026-07-02",
+    "shift": 1,
+    "shiftLabel": "Shift 1 (6am–2pm)",
+    "range": {
+      "unixStart": 1782943200,
+      "unixEnd": 1782972000,
+      "startLabel": "06:00",
+      "endLabel": "14:00"
+    },
+    "waste": {
+      "totalKg": 59,
+      "cipExcludedKg": 0,
+      "cycleCount": 14,
+      "cycles": [
+        {
+          "start": 1782944838,
+          "end": 1782944842,
+          "startLabel": "06:27",
+          "endLabel": "06:27",
+          "durationSec": 4,
+          "mode": "Production",
+          "wasteKg": 5,
+          "excludedCipKg": 0,
+          "counted": true
+        },
+        {
+          "start": 1782948511,
+          "end": 1782948515,
+          "startLabel": "07:28",
+          "endLabel": "07:28",
+          "durationSec": 4,
+          "mode": "Production",
+          "wasteKg": 7,
+          "excludedCipKg": 0,
+          "counted": true
+        },
+        {
+          "start": 1782951038,
+          "end": 1782951042,
+          "startLabel": "08:10",
+          "endLabel": "08:10",
+          "durationSec": 4,
+          "mode": "Production",
+          "wasteKg": 5,
+          "excludedCipKg": 0,
+          "counted": true
+        },
+        {
+          "start": 1782952173,
+          "end": 1782952176,
+          "startLabel": "08:29",
+          "endLabel": "08:29",
+          "durationSec": 3,
+          "mode": "Production",
+          "wasteKg": 4,
+          "excludedCipKg": 0,
+          "counted": true
+        },
+        {
+          "start": 1782953950,
+          "end": 1782953954,
+          "startLabel": "08:59",
+          "endLabel": "08:59",
+          "durationSec": 4,
+          "mode": "Production",
+          "wasteKg": 5,
+          "excludedCipKg": 0,
+          "counted": true
+        },
+        {
+          "start": 1782953958,
+          "end": 1782953960,
+          "startLabel": "08:59",
+          "endLabel": "08:59",
+          "durationSec": 2,
+          "mode": "Production",
+          "wasteKg": 3,
+          "excludedCipKg": 0,
+          "counted": true
+        },
+        {
+          "start": 1782955266,
+          "end": 1782955269,
+          "startLabel": "09:21",
+          "endLabel": "09:21",
+          "durationSec": 3,
+          "mode": "Production",
+          "wasteKg": 5,
+          "excludedCipKg": 0,
+          "counted": true
+        },
+        {
+          "start": 1782957209,
+          "end": 1782957211,
+          "startLabel": "09:53",
+          "endLabel": "09:53",
+          "durationSec": 2,
+          "mode": "Production",
+          "wasteKg": 3,
+          "excludedCipKg": 0,
+          "counted": true
+        },
+        {
+          "start": 1782959920,
+          "end": 1782959923,
+          "startLabel": "10:38",
+          "endLabel": "10:38",
+          "durationSec": 3,
+          "mode": "Production",
+          "wasteKg": 3,
+          "excludedCipKg": 0,
+          "counted": true
+        },
+        {
+          "start": 1782961347,
+          "end": 1782961350,
+          "startLabel": "11:02",
+          "endLabel": "11:02",
+          "durationSec": 3,
+          "mode": "Production",
+          "wasteKg": 4,
+          "excludedCipKg": 0,
+          "counted": true
+        },
+        {
+          "start": 1782962807,
+          "end": 1782962810,
+          "startLabel": "11:26",
+          "endLabel": "11:26",
+          "durationSec": 3,
+          "mode": "Production",
+          "wasteKg": 4,
+          "excludedCipKg": 0,
+          "counted": true
+        },
+        {
+          "start": 1782964717,
+          "end": 1782964719,
+          "startLabel": "11:58",
+          "endLabel": "11:58",
+          "durationSec": 2,
+          "mode": "Production",
+          "wasteKg": 3,
+          "excludedCipKg": 0,
+          "counted": true
+        },
+        {
+          "start": 1782966484,
+          "end": 1782966487,
+          "startLabel": "12:28",
+          "endLabel": "12:28",
+          "durationSec": 3,
+          "mode": "Production",
+          "wasteKg": 3,
+          "excludedCipKg": 0,
+          "counted": true
+        },
+        {
+          "start": 1782968365,
+          "end": 1782968369,
+          "startLabel": "12:59",
+          "endLabel": "12:59",
+          "durationSec": 4,
+          "mode": "Production",
+          "wasteKg": 5,
+          "excludedCipKg": 0,
+          "counted": true
+        }
+      ],
+      "bySku": [
+        {
+          "sku": "LCM",
+          "kg": 59
+        }
+      ],
+      "trend": [
+        {
+          "t": 1782943650,
+          "label": "06:00",
+          "value": 0
+        },
+        {
+          "t": 1782944550,
+          "label": "06:15",
+          "value": 5
+        },
+        {
+          "t": 1782945450,
+          "label": "06:30",
+          "value": 0
+        },
+        {
+          "t": 1782946350,
+          "label": "06:45",
+          "value": 0
+        },
+        {
+          "t": 1782947250,
+          "label": "07:00",
+          "value": 0
+        },
+        {
+          "t": 1782948150,
+          "label": "07:15",
+          "value": 7
+        },
+        {
+          "t": 1782949050,
+          "label": "07:30",
+          "value": 0
+        },
+        {
+          "t": 1782949950,
+          "label": "07:45",
+          "value": 0
+        },
+        {
+          "t": 1782950850,
+          "label": "08:00",
+          "value": 5
+        },
+        {
+          "t": 1782951750,
+          "label": "08:15",
+          "value": 4
+        },
+        {
+          "t": 1782952650,
+          "label": "08:30",
+          "value": 0
+        },
+        {
+          "t": 1782953550,
+          "label": "08:45",
+          "value": 8
+        },
+        {
+          "t": 1782954450,
+          "label": "09:00",
+          "value": 0
+        },
+        {
+          "t": 1782955350,
+          "label": "09:15",
+          "value": 5
+        },
+        {
+          "t": 1782956250,
+          "label": "09:30",
+          "value": 0
+        },
+        {
+          "t": 1782957150,
+          "label": "09:45",
+          "value": 3
+        },
+        {
+          "t": 1782958050,
+          "label": "10:00",
+          "value": 0
+        },
+        {
+          "t": 1782958950,
+          "label": "10:15",
+          "value": 0
+        },
+        {
+          "t": 1782959850,
+          "label": "10:30",
+          "value": 3
+        },
+        {
+          "t": 1782960750,
+          "label": "10:45",
+          "value": 0
+        },
+        {
+          "t": 1782961650,
+          "label": "11:00",
+          "value": 4
+        },
+        {
+          "t": 1782962550,
+          "label": "11:15",
+          "value": 4
+        },
+        {
+          "t": 1782963450,
+          "label": "11:30",
+          "value": 0
+        },
+        {
+          "t": 1782964350,
+          "label": "11:45",
+          "value": 3
+        },
+        {
+          "t": 1782965250,
+          "label": "12:00",
+          "value": 0
+        },
+        {
+          "t": 1782966150,
+          "label": "12:15",
+          "value": 3
+        },
+        {
+          "t": 1782967050,
+          "label": "12:30",
+          "value": 0
+        },
+        {
+          "t": 1782967950,
+          "label": "12:45",
+          "value": 5
+        },
+        {
+          "t": 1782968850,
+          "label": "13:00",
+          "value": 0
+        },
+        {
+          "t": 1782969750,
+          "label": "13:15",
+          "value": 0
+        },
+        {
+          "t": 1782970650,
+          "label": "13:30",
+          "value": 0
+        },
+        {
+          "t": 1782971550,
+          "label": "13:45",
+          "value": 0
+        }
+      ]
+    },
+    "source": "auto",
+    "savedAt": "2026-07-02T06:10:01.862Z",
+    "tagged": false,
+    "tagReason": null,
+    "taggedAt": null
+  },
+  {
+    "date": "2026-07-01",
+    "shift": 3,
+    "shiftLabel": "Shift 3 (10pm–6am)",
+    "range": {
+      "unixStart": 1782914400,
+      "unixEnd": 1782943200,
+      "startLabel": "22:00",
+      "endLabel": "06:00"
+    },
+    "waste": {
+      "totalKg": 97,
+      "cipExcludedKg": 0,
+      "cycleCount": 3,
+      "cycles": [
+        {
+          "start": 1782920136,
+          "end": 1782920305,
+          "startLabel": "23:35",
+          "endLabel": "23:38",
+          "durationSec": 169,
+          "mode": "Production",
+          "wasteKg": 51,
+          "excludedCipKg": 0,
+          "counted": true
+        },
+        {
+          "start": 1782931146,
+          "end": 1782931196,
+          "startLabel": "02:39",
+          "endLabel": "02:39",
+          "durationSec": 50,
+          "mode": "Production",
+          "wasteKg": 37,
+          "excludedCipKg": 0,
+          "counted": true
+        },
+        {
+          "start": 1782942890,
+          "end": 1782942978,
+          "startLabel": "05:54",
+          "endLabel": "05:56",
+          "durationSec": 88,
+          "mode": "Production",
+          "wasteKg": 9,
+          "excludedCipKg": 0,
+          "counted": true
+        }
+      ],
+      "bySku": [
+        {
+          "sku": "LCM",
+          "kg": 97
+        }
+      ],
+      "trend": [
+        {
+          "t": 1782914850,
+          "label": "22:00",
+          "value": 0
+        },
+        {
+          "t": 1782915750,
+          "label": "22:15",
+          "value": 0
+        },
+        {
+          "t": 1782916650,
+          "label": "22:30",
+          "value": 0
+        },
+        {
+          "t": 1782917550,
+          "label": "22:45",
+          "value": 0
+        },
+        {
+          "t": 1782918450,
+          "label": "23:00",
+          "value": 0
+        },
+        {
+          "t": 1782919350,
+          "label": "23:15",
+          "value": 0
+        },
+        {
+          "t": 1782920250,
+          "label": "23:30",
+          "value": 51
+        },
+        {
+          "t": 1782921150,
+          "label": "23:45",
+          "value": 0
+        },
+        {
+          "t": 1782922050,
+          "label": "00:00",
+          "value": 0
+        },
+        {
+          "t": 1782922950,
+          "label": "00:15",
+          "value": 0
+        },
+        {
+          "t": 1782923850,
+          "label": "00:30",
+          "value": 0
+        },
+        {
+          "t": 1782924750,
+          "label": "00:45",
+          "value": 0
+        },
+        {
+          "t": 1782925650,
+          "label": "01:00",
+          "value": 0
+        },
+        {
+          "t": 1782926550,
+          "label": "01:15",
+          "value": 0
+        },
+        {
+          "t": 1782927450,
+          "label": "01:30",
+          "value": 0
+        },
+        {
+          "t": 1782928350,
+          "label": "01:45",
+          "value": 0
+        },
+        {
+          "t": 1782929250,
+          "label": "02:00",
+          "value": 0
+        },
+        {
+          "t": 1782930150,
+          "label": "02:15",
+          "value": 0
+        },
+        {
+          "t": 1782931050,
+          "label": "02:30",
+          "value": 37
+        },
+        {
+          "t": 1782931950,
+          "label": "02:45",
+          "value": 0
+        },
+        {
+          "t": 1782932850,
+          "label": "03:00",
+          "value": 0
+        },
+        {
+          "t": 1782933750,
+          "label": "03:15",
+          "value": 0
+        },
+        {
+          "t": 1782934650,
+          "label": "03:30",
+          "value": 0
+        },
+        {
+          "t": 1782935550,
+          "label": "03:45",
+          "value": 0
+        },
+        {
+          "t": 1782936450,
+          "label": "04:00",
+          "value": 0
+        },
+        {
+          "t": 1782937350,
+          "label": "04:15",
+          "value": 0
+        },
+        {
+          "t": 1782938250,
+          "label": "04:30",
+          "value": 0
+        },
+        {
+          "t": 1782939150,
+          "label": "04:45",
+          "value": 0
+        },
+        {
+          "t": 1782940050,
+          "label": "05:00",
+          "value": 0
+        },
+        {
+          "t": 1782940950,
+          "label": "05:15",
+          "value": 0
+        },
+        {
+          "t": 1782941850,
+          "label": "05:30",
+          "value": 0
+        },
+        {
+          "t": 1782942750,
+          "label": "05:45",
+          "value": 9
+        }
+      ]
+    },
+    "source": "auto",
+    "savedAt": "2026-07-02T00:56:19.261Z",
+    "tagged": false,
+    "tagReason": null,
+    "taggedAt": null
+  },
+  {
+    "date": "2026-07-01",
+    "shift": 2,
+    "shiftLabel": "Shift 2 (2pm–10pm)",
+    "range": {
+      "unixStart": 1782885600,
+      "unixEnd": 1782914400,
+      "startLabel": "14:00",
+      "endLabel": "22:00"
+    },
+    "waste": {
+      "totalKg": 37,
+      "cipExcludedKg": 0,
+      "cycleCount": 2,
+      "cycles": [
+        {
+          "start": 1782890156,
+          "end": 1782890164,
+          "startLabel": "15:15",
+          "endLabel": "15:16",
+          "durationSec": 8,
+          "mode": "Production",
+          "wasteKg": 18,
+          "excludedCipKg": 0,
+          "counted": true
+        },
+        {
+          "start": 1782904111,
+          "end": 1782904124,
+          "startLabel": "19:08",
+          "endLabel": "19:08",
+          "durationSec": 13,
+          "mode": "Production",
+          "wasteKg": 19,
+          "excludedCipKg": 0,
+          "counted": true
+        }
+      ],
+      "bySku": [
+        {
+          "sku": "LCM",
+          "kg": 37
+        }
+      ],
+      "trend": [
+        {
+          "t": 1782886050,
+          "label": "14:00",
+          "value": 0
+        },
+        {
+          "t": 1782886950,
+          "label": "14:15",
+          "value": 0
+        },
+        {
+          "t": 1782887850,
+          "label": "14:30",
+          "value": 0
+        },
+        {
+          "t": 1782888750,
+          "label": "14:45",
+          "value": 0
+        },
+        {
+          "t": 1782889650,
+          "label": "15:00",
+          "value": 0
+        },
+        {
+          "t": 1782890550,
+          "label": "15:15",
+          "value": 18
+        },
+        {
+          "t": 1782891450,
+          "label": "15:30",
+          "value": 0
+        },
+        {
+          "t": 1782892350,
+          "label": "15:45",
+          "value": 0
+        },
+        {
+          "t": 1782893250,
+          "label": "16:00",
+          "value": 0
+        },
+        {
+          "t": 1782894150,
+          "label": "16:15",
+          "value": 0
+        },
+        {
+          "t": 1782895050,
+          "label": "16:30",
+          "value": 0
+        },
+        {
+          "t": 1782895950,
+          "label": "16:45",
+          "value": 0
+        },
+        {
+          "t": 1782896850,
+          "label": "17:00",
+          "value": 0
+        },
+        {
+          "t": 1782897750,
+          "label": "17:15",
+          "value": 0
+        },
+        {
+          "t": 1782898650,
+          "label": "17:30",
+          "value": 0
+        },
+        {
+          "t": 1782899550,
+          "label": "17:45",
+          "value": 0
+        },
+        {
+          "t": 1782900450,
+          "label": "18:00",
+          "value": 0
+        },
+        {
+          "t": 1782901350,
+          "label": "18:15",
+          "value": 0
+        },
+        {
+          "t": 1782902250,
+          "label": "18:30",
+          "value": 0
+        },
+        {
+          "t": 1782903150,
+          "label": "18:45",
+          "value": 0
+        },
+        {
+          "t": 1782904050,
+          "label": "19:00",
+          "value": 19
+        },
+        {
+          "t": 1782904950,
+          "label": "19:15",
+          "value": 0
+        },
+        {
+          "t": 1782905850,
+          "label": "19:30",
+          "value": 0
+        },
+        {
+          "t": 1782906750,
+          "label": "19:45",
+          "value": 0
+        },
+        {
+          "t": 1782907650,
+          "label": "20:00",
+          "value": 0
+        },
+        {
+          "t": 1782908550,
+          "label": "20:15",
+          "value": 0
+        },
+        {
+          "t": 1782909450,
+          "label": "20:30",
+          "value": 0
+        },
+        {
+          "t": 1782910350,
+          "label": "20:45",
+          "value": 0
+        },
+        {
+          "t": 1782911250,
+          "label": "21:00",
+          "value": 0
+        },
+        {
+          "t": 1782912150,
+          "label": "21:15",
+          "value": 0
+        },
+        {
+          "t": 1782913050,
+          "label": "21:30",
+          "value": 0
+        },
+        {
+          "t": 1782913950,
+          "label": "21:45",
+          "value": 0
+        }
+      ]
+    },
+    "source": "auto",
+    "savedAt": "2026-07-02T00:56:19.228Z",
+    "tagged": false,
+    "tagReason": null,
+    "taggedAt": null
+  },
+  {
+    "date": "2026-07-01",
+    "shift": 1,
+    "shiftLabel": "Shift 1 (6am–2pm)",
+    "range": {
+      "unixStart": 1782856800,
+      "unixEnd": 1782885600,
+      "startLabel": "06:00",
+      "endLabel": "14:00"
+    },
+    "waste": {
+      "totalKg": 57,
+      "cipExcludedKg": 0,
+      "cycleCount": 2,
+      "cycles": [
+        {
+          "start": 1782874459,
+          "end": 1782874688,
+          "startLabel": "10:54",
+          "endLabel": "10:58",
+          "durationSec": 229,
+          "mode": "Production",
+          "wasteKg": 0,
+          "excludedCipKg": 0,
+          "counted": false
+        },
+        {
+          "start": 1782874749,
+          "end": 1782876793,
+          "startLabel": "10:59",
+          "endLabel": "11:33",
+          "durationSec": 2044,
+          "mode": "Production",
+          "wasteKg": 57,
+          "excludedCipKg": 0,
+          "counted": true
+        }
+      ],
+      "bySku": [
+        {
+          "sku": "LCM",
+          "kg": 57
+        }
+      ],
+      "trend": [
+        {
+          "t": 1782857250,
+          "label": "06:00",
+          "value": 0
+        },
+        {
+          "t": 1782858150,
+          "label": "06:15",
+          "value": 0
+        },
+        {
+          "t": 1782859050,
+          "label": "06:30",
+          "value": 0
+        },
+        {
+          "t": 1782859950,
+          "label": "06:45",
+          "value": 0
+        },
+        {
+          "t": 1782860850,
+          "label": "07:00",
+          "value": 0
+        },
+        {
+          "t": 1782861750,
+          "label": "07:15",
+          "value": 0
+        },
+        {
+          "t": 1782862650,
+          "label": "07:30",
+          "value": 0
+        },
+        {
+          "t": 1782863550,
+          "label": "07:45",
+          "value": 0
+        },
+        {
+          "t": 1782864450,
+          "label": "08:00",
+          "value": 0
+        },
+        {
+          "t": 1782865350,
+          "label": "08:15",
+          "value": 0
+        },
+        {
+          "t": 1782866250,
+          "label": "08:30",
+          "value": 0
+        },
+        {
+          "t": 1782867150,
+          "label": "08:45",
+          "value": 0
+        },
+        {
+          "t": 1782868050,
+          "label": "09:00",
+          "value": 0
+        },
+        {
+          "t": 1782868950,
+          "label": "09:15",
+          "value": 0
+        },
+        {
+          "t": 1782869850,
+          "label": "09:30",
+          "value": 0
+        },
+        {
+          "t": 1782870750,
+          "label": "09:45",
+          "value": 0
+        },
+        {
+          "t": 1782871650,
+          "label": "10:00",
+          "value": 0
+        },
+        {
+          "t": 1782872550,
+          "label": "10:15",
+          "value": 0
+        },
+        {
+          "t": 1782873450,
+          "label": "10:30",
+          "value": 0
+        },
+        {
+          "t": 1782874350,
+          "label": "10:45",
+          "value": 0
+        },
+        {
+          "t": 1782875250,
+          "label": "11:00",
+          "value": 55
+        },
+        {
+          "t": 1782876150,
+          "label": "11:15",
+          "value": 2
+        },
+        {
+          "t": 1782877050,
+          "label": "11:30",
+          "value": 0
+        },
+        {
+          "t": 1782877950,
+          "label": "11:45",
+          "value": 0
+        },
+        {
+          "t": 1782878850,
+          "label": "12:00",
+          "value": 0
+        },
+        {
+          "t": 1782879750,
+          "label": "12:15",
+          "value": 0
+        },
+        {
+          "t": 1782880650,
+          "label": "12:30",
+          "value": 0
+        },
+        {
+          "t": 1782881550,
+          "label": "12:45",
+          "value": 0
+        },
+        {
+          "t": 1782882450,
+          "label": "13:00",
+          "value": 0
+        },
+        {
+          "t": 1782883350,
+          "label": "13:15",
+          "value": 0
+        },
+        {
+          "t": 1782884250,
+          "label": "13:30",
+          "value": 0
+        },
+        {
+          "t": 1782885150,
+          "label": "13:45",
+          "value": 0
+        }
+      ]
+    },
+    "source": "auto",
+    "savedAt": "2026-07-02T00:56:19.216Z",
+    "tagged": false,
+    "tagReason": null,
+    "taggedAt": null
+  },
+  {
+    "date": "2026-06-09",
+    "shift": 2,
+    "shiftLabel": "Shift 2 (2pm–10pm)",
+    "range": {
+      "unixStart": 1780984800,
+      "unixEnd": 1781013600,
+      "startLabel": "14:00",
+      "endLabel": "22:00"
+    },
+    "waste": {
+      "totalKg": 275,
+      "cipExcludedKg": 0,
+      "cycleCount": 2,
+      "cycles": [
+        {
+          "start": 1780984800,
+          "end": 1780986225,
+          "startLabel": "14:00",
+          "endLabel": "14:23",
+          "durationSec": 1425,
+          "mode": "Production",
+          "wasteKg": 0,
+          "excludedCipKg": 0,
+          "counted": false
+        },
+        {
+          "start": 1780986277,
+          "end": 1780993985,
+          "startLabel": "14:24",
+          "endLabel": "16:33",
+          "durationSec": 7708,
+          "mode": "Production",
+          "wasteKg": 275,
+          "excludedCipKg": 0,
+          "counted": true
+        }
+      ],
+      "bySku": [
+        {
+          "sku": "BFWM YVETTE",
+          "kg": 275
+        }
+      ],
+      "trend": [
+        {
+          "t": 1780985250,
+          "label": "14:00",
+          "value": 0
+        },
+        {
+          "t": 1780986150,
+          "label": "14:15",
+          "value": 35
+        },
+        {
+          "t": 1780987050,
+          "label": "14:30",
+          "value": 11
+        },
+        {
+          "t": 1780987950,
+          "label": "14:45",
+          "value": 54
+        },
+        {
+          "t": 1780988850,
+          "label": "15:00",
+          "value": 17
+        },
+        {
+          "t": 1780989750,
+          "label": "15:15",
+          "value": 1
+        },
+        {
+          "t": 1780990650,
+          "label": "15:30",
+          "value": 42
+        },
+        {
+          "t": 1780991550,
+          "label": "15:45",
+          "value": 36
+        },
+        {
+          "t": 1780992450,
+          "label": "16:00",
+          "value": 1
+        },
+        {
+          "t": 1780993350,
+          "label": "16:15",
+          "value": 76
+        },
+        {
+          "t": 1780994250,
+          "label": "16:30",
+          "value": 2
+        },
+        {
+          "t": 1780995150,
+          "label": "16:45",
+          "value": 0
+        },
+        {
+          "t": 1780996050,
+          "label": "17:00",
+          "value": 0
+        },
+        {
+          "t": 1780996950,
+          "label": "17:15",
+          "value": 0
+        },
+        {
+          "t": 1780997850,
+          "label": "17:30",
+          "value": 0
+        },
+        {
+          "t": 1780998750,
+          "label": "17:45",
+          "value": 0
+        },
+        {
+          "t": 1780999650,
+          "label": "18:00",
+          "value": 0
+        },
+        {
+          "t": 1781000550,
+          "label": "18:15",
+          "value": 0
+        },
+        {
+          "t": 1781001450,
+          "label": "18:30",
+          "value": 0
+        },
+        {
+          "t": 1781002350,
+          "label": "18:45",
+          "value": 0
+        },
+        {
+          "t": 1781003250,
+          "label": "19:00",
+          "value": 0
+        },
+        {
+          "t": 1781004150,
+          "label": "19:15",
+          "value": 0
+        },
+        {
+          "t": 1781005050,
+          "label": "19:30",
+          "value": 0
+        },
+        {
+          "t": 1781005950,
+          "label": "19:45",
+          "value": 0
+        },
+        {
+          "t": 1781006850,
+          "label": "20:00",
+          "value": 0
+        },
+        {
+          "t": 1781007750,
+          "label": "20:15",
+          "value": 0
+        },
+        {
+          "t": 1781008650,
+          "label": "20:30",
+          "value": 0
+        },
+        {
+          "t": 1781009550,
+          "label": "20:45",
+          "value": 0
+        },
+        {
+          "t": 1781010450,
+          "label": "21:00",
+          "value": 0
+        },
+        {
+          "t": 1781011350,
+          "label": "21:15",
+          "value": 0
+        },
+        {
+          "t": 1781012250,
+          "label": "21:30",
+          "value": 0
+        },
+        {
+          "t": 1781013150,
+          "label": "21:45",
+          "value": 0
+        }
+      ]
+    },
+    "source": "manual",
+    "savedAt": "2026-07-02T00:57:50.667Z",
+    "tagged": false,
+    "tagReason": null,
+    "taggedAt": null
+  }
+]

@@ -100,6 +100,7 @@ export default function TargetActualTable({ data, ingredients }) {
           </tbody>
         </table>
       </div>
+
     </div>
   );
 }

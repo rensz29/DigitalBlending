@@ -15,7 +15,7 @@ function fmtDuration(seconds) {
   return `${sec}s`;
 }
 
-export default function WastePanel({ waste, range }) {
+export default function WastePanel({ waste, range, saveControl = null }) {
   if (!waste) return null;
 
   const {
@@ -39,6 +39,7 @@ export default function WastePanel({ waste, range }) {
       <div className="subtitle" style={{ marginBottom: 'var(--space-4)' }}>
         Forward-flow through the waste valve while open, excluding CIP cleaning.
       </div>
+      {saveControl && <div style={{ marginBottom: 'var(--space-4)' }}>{saveControl}</div>}
 
       <div className="kpi-grid" style={{ marginBottom: 'var(--space-5)' }}>
         {kpis.map((c) => (

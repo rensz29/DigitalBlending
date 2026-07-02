@@ -4,7 +4,7 @@ import {
   ActivityIcon,
   DashboardIcon,
   SettingsIcon,
-  WorkflowIcon,
+  DropletIcon,
   ChevronsLeftIcon,
 } from './icons.jsx';
 
@@ -12,6 +12,7 @@ const NAV_ITEMS = [
   { to: '/opcua', label: 'Real-Time', Icon: ActivityIcon },
   // { to: '/process-flow', label: 'Process Flow', Icon: WorkflowIcon },
   { to: '/', label: 'History', Icon: DashboardIcon, end: true },
+  { to: '/wastewise', label: 'Wastewise', Icon: DropletIcon },
   { to: '/settings', label: 'Settings', Icon: SettingsIcon },
 ];
 

@@ -26,25 +26,27 @@ export default function TopBar({ title, theme, onToggleTheme, onOpenMobile }) {
 
   return (
     <header className="app-topbar">
-      <button
-        type="button"
-        className="icon-btn topbar-hamburger"
-        onClick={onOpenMobile}
-        aria-label="Open navigation"
-      >
-        <MenuIcon />
-      </button>
+      <div className="topbar-inner">
+        <button
+          type="button"
+          className="icon-btn topbar-hamburger"
+          onClick={onOpenMobile}
+          aria-label="Open navigation"
+        >
+          <MenuIcon />
+        </button>
 
-      <h1 className="topbar-title">{title}</h1>
+        <h1 className="topbar-title">{title}</h1>
 
-      <div className="topbar-spacer" />
+        <div className="topbar-spacer" />
 
-      <div className="topbar-tools">
-        <div className="topbar-clock">
-          <div className="topbar-clock-time">{time}</div>
-          <div className="topbar-clock-date">{date}</div>
+        <div className="topbar-tools">
+          <div className="topbar-clock">
+            <div className="topbar-clock-time">{time}</div>
+            <div className="topbar-clock-date">{date}</div>
+          </div>
+          <ThemeToggle theme={theme} onToggle={onToggleTheme} />
         </div>
-        <ThemeToggle theme={theme} onToggle={onToggleTheme} />
       </div>
     </header>
   );

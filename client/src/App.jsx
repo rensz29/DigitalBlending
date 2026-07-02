@@ -6,6 +6,7 @@ import Dashboard from './pages/Dashboard.jsx';
 import RecipeSettings from './pages/RecipeSettings.jsx';
 import OpcuaDashboard from './pages/OpcuaDashboard.jsx';
 import ProcessFlowPage from './pages/ProcessFlowPage.jsx';
+import WastewisePage from './pages/WastewisePage.jsx';
 import { useTheme } from './hooks/useTheme.js';
 import { WebSocketProvider } from './hooks/useWebSocket.jsx';
 
@@ -13,6 +14,7 @@ const TITLES = {
   '/': 'Digital Blending History',
   '/settings': 'Recipe Settings',
   '/opcua': 'OPC-UA Dashboard',
+  '/wastewise': 'Wastewise',
   '/process-flow': 'Process Flow',
 };
 
@@ -64,6 +66,7 @@ export default function App() {
               }
             />
             <Route path="/opcua" element={<OpcuaDashboard />} />
+            <Route path="/wastewise" element={<div className="page"><WastewisePage /></div>} />
             <Route path="/process-flow" element={<ProcessFlowPage />} />
           </Routes>
         </div>

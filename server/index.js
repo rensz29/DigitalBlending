@@ -7,11 +7,14 @@ import { fileURLToPath } from 'url';
 import { WebSocketServer } from 'ws';
 import shiftDataRouter from './routes/shift-data.js';
 import wasteDataRouter from './routes/waste-data.js';
+import wasteRecordsRouter from './routes/waste-records.js';
+import dosingErrorDataRouter from './routes/dosing-error-data.js';
 import recipesRouter from './routes/recipes.js';
 import ingredientPricesRouter from './routes/ingredient-prices.js';
 import clStatusesRouter from './routes/cl-statuses.js';
 import opcuaRouter from './routes/opcua.js';
 import * as opcua from './lib/opcua-client.js';
+import { startWasteAutoSaveService } from './lib/wasteAutoSaveService.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -28,6 +31,8 @@ app.use(express.json());
 // Digital Blending (PI historian) API
 app.use('/api', shiftDataRouter);
 app.use('/api', wasteDataRouter);
+app.use('/api', wasteRecordsRouter);
+app.use('/api', dosingErrorDataRouter);
 app.use('/api', recipesRouter);
 app.use('/api', ingredientPricesRouter);
 app.use('/api', clStatusesRouter);
@@ -89,4 +94,5 @@ server.listen(PORT, () => {
   console.log(`API server listening on http://localhost:${PORT}`);
   console.log(`OPC UA WebSocket available at ws://localhost:${PORT}/ws`);
   console.log(`OPC UA target endpoint: ${opcua.getStatus().endpoint}`);
+  startWasteAutoSaveService();
 });

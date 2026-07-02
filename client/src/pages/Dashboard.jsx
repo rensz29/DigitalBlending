@@ -5,6 +5,7 @@ import SkuBreakdown from '../components/SkuBreakdown.jsx';
 import TargetActualTable from '../components/TargetActualTable.jsx';
 import IngredientOverviewPanel from '../components/IngredientOverviewPanel.jsx';
 import WasteTab from '../components/WasteTab.jsx';
+import DosingErrorTab from '../components/DosingErrorTab.jsx';
 import EmptyState from '../components/EmptyState.jsx';
 import { SkeletonCards, SkeletonText, Skeleton, SkeletonOverview } from '../components/Skeleton.jsx';
 import LoadingOverlay from '../components/LoadingOverlay.jsx';
@@ -19,7 +20,8 @@ function today() {
 
 const TABS = [
   { id: 'overview', label: 'Overview' },
-  { id: 'wastewise', label: 'Wastewise' },
+  { id: 'dosing-error', label: 'Dosing Error' },
+  { id: 'wastewise', label: 'Waste' },
 ];
 
 export default function Dashboard() {
@@ -31,9 +33,12 @@ export default function Dashboard() {
   const [activeTab, setActiveTab] = useState('overview');
   // Mount the Wastewise tab (and its separate query) only after it's first opened.
   const [wasteMounted, setWasteMounted] = useState(false);
+  // Mount the Dosing Error tab only after it's first opened.
+  const [dosingMounted, setDosingMounted] = useState(false);
 
   function selectTab(id) {
     if (id === 'wastewise') setWasteMounted(true);
+    if (id === 'dosing-error') setDosingMounted(true);
     setActiveTab(id);
   }
 
@@ -147,10 +152,20 @@ export default function Dashboard() {
 
             <SkuBreakdown data={result.skuBreakdown} ingredients={ingredients} />
 
-            <TargetActualTable data={result.recipeComparison} ingredients={ingredients} />
+            <TargetActualTable
+              data={result.recipeComparison}
+              ingredients={ingredients}
+            />
           </div>
         )}
       </div>
+
+      {/* Dosing Error tab — fetched lazily, separate query */}
+      {dosingMounted && (
+        <div style={{ display: activeTab === 'dosing-error' ? undefined : 'none' }}>
+          <DosingErrorTab date={date} shift={shift} />
+        </div>
+      )}
 
       {/* Wastewise tab — fetched lazily, separate query */}
       {wasteMounted && (
